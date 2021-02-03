@@ -2,11 +2,13 @@
 Notes about AWS in preparation for the Certified Cloud Practitioner exam
 
 ## Topics
--[What is AWS?](#what-is-aws)
--[Benefits of AWS](#benefits-of-aws)
--[Global Infrastructure](#global-infrastructure)
--[Account Setup](#account-setup)
--[Products & Services](#products-&-services)
+- [What is AWS?](#what-is-aws)
+- [Benefits of AWS](#benefits-of-aws)
+- [Global Infrastructure](#global-infrastructure)
+- [Account Setup](#account-setup)
+- [Products & Services](#products-&-services)
+- [Billing & Account Management](#billing-and-account-management)
+- [Tags and Resource Groups](#tags-and-resource-groups)
 
 ### What is AWS?
 AWS is **I**nfrastructure **a**s **a** **S**ervice (IaaS). It forms the base for delivering other products. Heroku is a **P**latform **a**s **a** **S**ervice (PaaS), through which applications can be hosted, and Gmail and Salesforce are **S**oftware **a**s **a** **S**ervice (SaaS).
@@ -35,7 +37,7 @@ Since AWS has availability zones in regions all over the world, users are never 
 ##### Availability Zones (AZ): 69
 Inter-AZ latency: <10ms
 ###### Edge Locations (EL): Nearing at >= 3 per AZ
-Each EL has a is owned by a trusted partner of AWS, and serves requests for **Cloudfront** and **Route53**, as well as **S3 Transfer Acceleration** and **API Gateway traffic**
+Each EL has a is owned by a trusted partner of AWS, and serves requests for **Cloudfront** and **Route53**, as well as **S**imple **S**torage **S**ervice (**S3**) **Transfer Acceleration** and **API Gateway traffic**
 
 ### Account Setup
 After creating an account,
@@ -92,7 +94,7 @@ After creating an account,
   Lambda is a service that allows code for "serverless" applications, i.e. apps run on auto-scaling cloud-based servers that are 'pay-as-you-go', to be written for the front-end. It responds to events initiated by the user by firing functions based on the event.
   
 #### Free Services
-  -Completely free: IAM, Amazon VPC, Organizations & Consolidated Billing, AWS Cost Explorer
+  -Completely free: IAM, Amazon **V**irtual **P**rivate **C**loud, Organizations & Consolidated Billing, AWS Cost Explorer
   - Free, but resources they provision cost money:
     - **Auto Scaling**
     - **CloudFormation**
@@ -151,11 +153,60 @@ After creating an account,
     - Amazon RDS backups
   - **Service Limits**
     - VPC
-    
+  
+### Billing and Account Management
+
 #### Consolidated Billing
-One master account pays the entire bill for all associated member accounts
+One management account pays the entire bill for all associated member accounts
 
 #### Volume Discounts
 Member accounts are summed toward the total usage, so be sure to register your account to the organization
   - First 10TB @ $0.12 per GB
   - Next 40TB @ $0.13 per GB
+  
+#### AWS Cost Explorer
+Lets you visualize, understand, and manager costs and usage time
+  - Accounts within an AWS Organization are consolidated in the **Management Account**
+  - Forecasting gives an idea of future costs
+  - **Filter** and **Grouping** for deeper dive into data
+
+#### AWS Budgets
+Plan **service usage**, **service costs**, and **instance reservations**
+- First **two** are **free**
+- Budget costs, past first two: **$0.02 / day**, or about **~$0.60 / month**
+- **20,000** budget limit
+- **Monthly**, **Quarterly**, or **Yearly** reports
+- Supports **EC2**, **RDS**, **Redshift**, **ElastiCache** reservations
+- Also available via **Budgets API**
+- Email or **Chatbot**, works with Slack
+
+#### **Pricing Calculator** (New name)
+Estimate how much you'd save if moveing to AWS from on-premises
+- Provides a **set of reports** for **executive presentations**
+
+#### AWS Landing Zone
+Helps enterprises set up an AWS multi-account by providing a **baseline environment for a multi-account environment
+- **A**count **V**ending **M**achine (AVM) provisions and configures new accounts to add to the management account
+- Uses **S**ingle **S**ign **O**n (SSO) for managing and accessing accounts
+- Environment is customizable to allow customers to implement their own baselines through a LZ configuration and update pipeline
+
+### Tags and Resource Groups
+Organize and consolidate info based on projects and resources
+- **Tags**: Words or phrases acting as metadata for organizing AWS accounts
+- **Resource Groups**: collections of resources that share one or more tag(s). Can display details based on:
+  - **Metrics**
+  - **Alarms**
+  - **Configuration Settings**
+
+#### AWS Cost and Usage Report
+Generate a detailed spreadsheet of costs and usage
+- Places reports into a **S**imple **S**torage **S**ervice bucket
+- Can use Athena to turn the report into a DB
+- Can use QuickSight to visualize billing data as graphs
+  
+### AWS Quick Starts
+Pre-built templates to help you deploy popular stacks on AWS, composed of 3 parts:
+1. Architecture reference for the deployment (diagram)
+2. AWS CloudFOrmation templates that automate and configure deployment
+3. Deployment guide, explaining the architecture and implementation in detail
+- Most QS reference deployments enable deployment in less than an hour
